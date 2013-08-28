@@ -1,0 +1,7 @@
+- version = Goal.image_version_at(index)
+- version_widths = { one_half: 460, one_third: 300, two_thirds: 620 }
+.explore_item.cropper{ class: Goal.span_class_at(index) }
+  = image_tag goal.image_url, class: 'jwindowcrop', data: { version: version, width: version_widths[version] }
+
+  - %w(x y w h).each do |option|
+    = f.hidden_field "#{version}_#{option}"

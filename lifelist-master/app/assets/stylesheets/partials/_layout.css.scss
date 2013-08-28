@@ -1,0 +1,119 @@
+body {
+  padding-top: 65px;
+  font-family: $font-default;
+  font-size: 12px;
+  background-color: $color-background;
+}
+
+#main-wrap {
+  width: 1000px;
+  @include border-radius( 10px );
+  @include box-shadow( 0 2px 5px 0 rgba(0,0,0,.1) );
+  background: white;
+
+  &.sessions {
+    padding-top: 40px;
+  }
+}
+
+h1 {
+  font-size: 26px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+.vcard {
+  margin: 20px 0;
+  dt {
+    display: none;
+  }
+
+  dd {
+    margin: 0 0 10px;
+
+    img {@include border-radius( 4px );
+    }
+
+    &.name {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0 0 5px;
+    }
+
+    &.location {
+      color: lighten( $text-color, 25% );
+      .icon-location {
+        color: lighten( $text-color, 50% );
+        margin: 3px 3px 0 0;
+      }
+
+    }
+
+  }
+
+}
+
+[class^="icon-"] {
+  background: transparent;
+}
+
+.alert.container {
+  width: 1119px;
+  margin-bottom: 30px;
+}
+
+.imageupload {
+  margin-left: 180px;
+
+  .thumbnail {
+    width: 200px;
+    height: 200px;
+    line-height: 20px;
+  }
+
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 2s linear;
+}
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
+}
+
+form .spinner {
+  left: 120px;
+  top: -20px;
+}
+
+form.edit-user {
+  margin: 0;
+  border: 0;
+}
+
+@mixin box-style {
+  border: 1px solid rgba(0,0,0,.2);
+  @include border-radius( 3px );
+  @include box-shadow( 0 2px 2px 0 rgba(0,0,0,.05) );
+  background: white;
+}
+
+#lean_overlay {
+  position: fixed;
+  z-index:100;
+  top: 0px;
+  left: 0px;
+  height:100%;
+  width:100%;
+  background: #000;
+  display: none;
+}

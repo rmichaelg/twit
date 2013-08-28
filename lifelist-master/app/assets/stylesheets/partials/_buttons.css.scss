@@ -1,0 +1,126 @@
+@mixin btn-style( $color ) {
+  @include border-radius( 5px );
+  @include gradient-vertical( lighten( $color, 10% ), $color );
+  border: 1px solid $color;
+  @include box-shadow(
+  0 1px 0 0 rgba(255,255,255,.2) inset
+  );
+  color: white;
+  text-shadow: 0 1px 0 darken( $color, 15% );
+
+  &:hover, &:focus {
+    @include transition( none );
+    background-position: 0 0;
+    @include gradient-vertical( lighten( $color, 10% ), lighten( $color, 5% ) );
+    color: white;
+    text-shadow: 0 1px 0 darken( $color, 15% );
+  }
+
+  &:active, &.active {
+    @include box-shadow( 0 1px 3px rgba(0,0,0,.15) inset );
+    @include gradient-vertical( lighten( $color, 5% ), $color );
+    color: darken( $color, 10% );
+    text-shadow: 0 1px 0 rgba(255,255,255,.1);
+  }
+
+}
+
+.btn {
+  padding: 10px 15px;
+  font-family: $font-default;
+  font-weight: 400;
+
+  @include btn-style( $color-secondary );
+
+  [class^="icon-"] {
+    background-image: none;
+
+    &:before {
+      margin: 0;
+    }
+
+  }
+
+  &.btn-file, &.fileupload-exists {
+    border: 1px solid #bbbbbb;
+  }
+
+}
+
+.btn-primary {
+  @include btn-style( $color-primary );
+}
+
+.btn-success {
+  @include btn-style( $color-success );
+}
+
+.btn-facebook {
+  @include btn-style( #3B5998 );
+  .icon-facebook { margin-right: 10px; }
+}
+
+.btn-orange {
+  @include btn-style( #ff6000 );
+  @include box-shadow( 0 1px 0 0 rgba(0,0,0,.15) );
+  border: 0;
+}
+
+.btn-outline {
+  border: 1px solid rgba(255,255,255,.5);
+  background: transparent;
+  @include box-shadow( none );
+  text-shadow: none;
+  color: white;
+
+  &:hover, &:active, &:focus {
+    background: transparent;
+    @include box-shadow( none );
+    text-shadow: none;
+    border: 1px solid rgba(255,255,255,.8);
+    color: white;
+  }
+}
+
+.btn-toolbar {
+  & > .btn + .btn {
+    margin-left: 10px;
+  }
+
+}
+
+.btn-group {
+  & > .btn:first-child {
+    @include border-top-left-radius( 3px );
+    @include border-bottom-left-radius( 3px );
+  }
+
+  & > .btn:last-child,
+  & > .dropdown-toggle {
+    @include border-top-right-radius( 3px );
+    @include border-bottom-right-radius( 3px );
+  }
+
+  &.open > .btn {
+    @include translate( 0px, 2px );
+  }
+
+}
+
+.btn-mini {
+  padding: 0px 6px;
+
+  & + .dropdown-menu > li > a {
+    padding: 3px 8px;
+    font-size: 12px;
+  }
+
+}
+
+.btn-small {
+  padding: 5px 10px;
+}
+
+.btn-large {
+  padding: 13px 20px;
+}

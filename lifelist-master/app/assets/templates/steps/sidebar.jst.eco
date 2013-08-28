@@ -1,0 +1,6 @@
+<% if @pct_completed!=null: %>
+  Goal progress
+  <div class="progress" style="width:200px;"><div class="bar" style="width: <%= @pct_completed %>%;"></div></div>
+<% else: %>
+  Add steps and achieve your goal
+<% end %>

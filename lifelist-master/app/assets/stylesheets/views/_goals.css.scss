@@ -1,0 +1,84 @@
+body.goals.show {
+  .explore_item {
+    margin: 20px;
+
+    &:hover .explore_image {
+      opacity: 1;
+    }
+  }
+}
+
+.pathway-meta {
+  margin: 0 20px 10px;
+
+  .user-thumb {
+    height: 60px;
+    width: 60px;
+    @include border-radius( 5px );
+    margin: 0 15px 0 10px;
+  }
+
+  .user-name {
+    line-height: 1;
+    font-size: 14px;
+    color: #444;
+    margin: 20px 0 5px;
+  }
+
+  .user-location {
+    color: #aaa;
+    line-height: 1;
+  }
+
+  .icon-location {
+    color: #ccc;
+  }
+
+  .btn {
+    margin-top: 10px;
+    margin-right: 10px;
+
+    .icon-heart {
+      margin-right: 2px;
+    }
+  }
+}
+
+.pathway-steps {
+  margin: 0 20px 20px;
+  position: relative;
+
+  & > li {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 15px;
+  }
+
+  &:after, &:before {
+    bottom: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  &:after {
+    border-color: rgba(0, 0, 0, 0);
+    border-bottom-color: white;
+    border-width: 15px;
+    left: 40px;
+    top: -19px;
+    margin-left: -15px;
+  }
+
+  &:before {
+    border-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0,0,0,.1);
+    border-width: 16px;
+    left: 40px;
+    top: -21px;
+    margin-left: -16px;
+  }
+}

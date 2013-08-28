@@ -1,0 +1,2 @@
+<p class="title"><%- @item['highlight']['name'] %></p>
+<div class="type">goal</div>

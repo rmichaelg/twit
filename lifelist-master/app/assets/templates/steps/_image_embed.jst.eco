@@ -1,0 +1,1 @@
+<img class="step-image" alt="<%= @name %>" src="<%= @thumbnail_url %>">

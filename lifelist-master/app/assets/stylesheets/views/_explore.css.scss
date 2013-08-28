@@ -1,0 +1,91 @@
+body.explore, body.goals.edit {
+  #main-wrap {
+    background: white;
+    padding-top: 20px;
+
+    .row-fluid {
+      margin-bottom: 20px;
+    }
+
+  }
+
+}
+
+.explore_item {
+  position: relative;
+  height: 300px;
+  background: white;
+
+  &:hover {
+    .explore_image {
+      opacity: .3;
+    }
+    .list-actions, .edit-actions {
+      opacity: 1;
+    }
+  }
+
+  .title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 30;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 12px 105px 12px 18px;
+    background: url("/assets/overlay.png");
+    @include font-type( $font-default, 14px, 400 );
+    color: white;
+    text-shadow: 1px 1px 0 rgba(0,0,0,.2);
+    @include border-radius( 5px 5px 0 0 );
+
+      a, a:hover {
+        color: white;
+        text-decoration: none;
+      }
+   }
+
+  .btn-toolbar {
+    position: absolute;
+    opacity: 0;
+    @include transition( opacity .2s ease-in-out );
+
+    &.list-actions {
+      top: 50%;
+      margin: 0;
+      margin-top: -21px;
+      left: 50%;
+      margin-left: -51px;
+    }
+    &.edit-actions {
+      bottom: 0;
+      right: 10px;
+    }
+    .btn {
+      &:hover { @include btn-style( $color-error ); }
+    }
+  }
+
+  .explore_image {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    @include border-radius( 5px );
+    background-size: 100%;
+    opacity: 1;
+    @include transition( opacity .2s ease-in-out );
+  }
+
+  &.cropper {
+    display: none;
+
+    &.span4 {
+      margin-left: 0;
+    }
+  }
+}

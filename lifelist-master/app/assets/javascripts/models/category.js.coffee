@@ -1,0 +1,1 @@
+class Lifelist.Models.Category extends Backbone.Model

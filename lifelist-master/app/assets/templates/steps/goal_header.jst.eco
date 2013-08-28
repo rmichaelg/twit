@@ -1,0 +1,36 @@
+<div class="explore_item goal-banner">
+  <div class="explore_image" style="background-image: url(<%= @goal.get('feature_image_url') %>);"></div>
+  <div class="title"><%= @goal.get("name") %></div>
+  <div class="btn-toolbar edit-actions">
+    <div class="fileupload fileupload-new" data-provides="fileupload">
+      <span class="btn btn btn-small btn-secondary btn-file"><span class="fileupload-new">change image</span>
+        <input id="goal-image-upload" type="file" />
+      </span>
+    </div>
+  </div>
+</div>
+<div class="goal-actions btn-toolbar">
+<% if editable: %>
+  <% if @goal.get('published_at')?: %>
+  <div class="btn-group">
+    <button class="btn btn-primary" data-action="publish">Publish</button>
+    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li class="divider"></li>
+      <li><a class="error" data-action="unpublish" href="#unpublish">Unpublish</a></li>
+      <div class="published-at">Published <time class="timeago" datetime="<%= @goal.get('published_at') %>"></time></div>
+    </ul>
+  </div>
+  <% else: %>
+  <button class="btn btn-primary" data-action="publish">Publish</button>
+  <% end %>
+<% else: %>
+  <a id="add-to-lifelist" class="btn btn-primary" data-id="<%= @goal.id %>">
+    <i class="icon-plus"></i>
+    Add to Lifelist
+  </a>
+<% end %>
+</div>
+<div class="clear"></div>

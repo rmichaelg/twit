@@ -1,0 +1,47 @@
+<li data-id=<%= @step.id %> class="step<%= if editable then ' editable' else '' %>">
+  <div class="handle"></div>
+  <form class="editor">
+      <% if editable: %>
+      <input class="step-name" type="text" name="name" value="<%= @step.get('name') %>" placeholder="Enter a step title...">
+      <div class="step-status btn-group pull-right">
+        <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
+          <span class="current-status-name"><%= @step.get('status') %></span>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="step-status-change" href="#">To-Do</a></li>
+          <li><a class="warning step-status-change" href="#">In Progress</a></li>
+          <li><a class="success step-status-change" href="#">Done</a></li>
+          <li class="divider"></li>
+          <li><a class="error remove" href="#">Remove Step</a></li>
+        </ul>
+      </div>
+      <div class="detail-editor">
+        <div class="btn-toolbar edit-actions">
+          <div class="fileupload<%= if @step.get('image').url? then ' fileupload-exists' else ' fileupload-new' %>" data-provides="fileupload">
+            <span class="btn btn-small btn-secondary btn-file add-step-image"><span class="fileupload-new">add image</span>
+              <input class="step-image-upload" type="file" />
+            </span>
+            <a data-action="destroy-step-image" href="#" class="btn btn-small btn-danger destroy-step-image">remove image</a>
+          </div>
+        </div>
+        <div class="step-embed">
+          <% if @step.get('image').url?: %>
+            <%- JST['steps/_image_embed'](name: @step.get('name'), thumbnail_url: @step.get('image').thumbnail.url) %>
+          <% end %>
+        </div>
+
+        <textarea class="step-description" name="description" placeholder="Description"></textarea>
+        <input class="step-url" type="text" name="url" value="<%= @step.get('url') %>" placeholder="Enter a URL...">
+      </div>
+      <% else: %>
+      <input type="text" name="name" value="<%= @step.get('name') %>" placeholder="Enter a new action" disabled="disabled">
+      <div class="step-status btn-group pull-right">
+        <a class="btn btn-mini step-status-change" href="#" disabled="disabled">
+          <%= @step.get('status') %>
+          <span class="caret"></span>
+        </a>
+      </div>
+      <% end %>
+  </form>
+</li>

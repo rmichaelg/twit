@@ -1,0 +1,114 @@
+class Lifelist.Routers.Main extends Backbone.Router
+
+  userSearchItemTemplate: JST['search_items/user']
+  goalSearchItemTemplate: JST['search_items/goal']
+
+  routes:
+    '': 'rootPath'
+    'users/sign_in': 'rootPath'
+    'explore': 'rootPath'
+    'goals/:goal_id': 'goalShow'
+    'goals/:goal_id/edit': 'goalEdit'
+    ':username' : 'goalsIndex'
+    ':username/goals/:goal_id': 'stepsIndex'
+
+  initialize: ->
+    unless $('body').hasClass('logged-out')
+      @categories = new Lifelist.Collections.Categories()
+      try
+        @categories.reset(categories_data)
+      catch error
+        @categories.fetch()
+
+      @initSearch()
+
+  userGoalsPath: ->
+    "/#{username}/goals"
+
+  userGoalPath: (goal_id) ->
+    "#{@userGoalsPath()}/#{goal_id}"
+
+  userGoalStepsPath: (goal_id) ->
+    "#{@userGoalPath(goal_id)}/steps"
+
+  goalPath: (goal_id) ->
+    "/goals/#{goal_id}"
+
+  goalPathwaysPath: (goal_id) ->
+    "#{@goalPath(goal_id)}/pathways"
+
+  goalVotePath: (goal_id) ->
+    "#{@goalPath(goal_id)}/toggle_vote"
+
+  createOrUpdateStepsIndex: (collection, model) ->
+    if @steps_index?
+      @steps_index.collection = collection
+      @steps_index.model = model
+      @steps_index.initialize()
+    else
+      @steps_index = new Lifelist.Views.StepsIndex el: '#steps-container', collection: collection, model: model
+
+  goalsIndex: (username) ->
+    return if username != 'profile' && <%= User::RESERVED_URLS %>.indexOf(username) > -1
+
+    @goals ||= new Lifelist.Collections.Goals(url: @userGoalsPath())
+    fetching = @goals.fetch()
+    fetching.done =>
+      @goals_index ||= new Lifelist.Views.GoalsIndex(el: '#goals-container', collection: @goals, categories: @categories)
+      if @goals.models.length
+        # default to the first goal
+        first_goal = @goals.models[0].set(active: true)
+        first_goal_id = first_goal.get('id')
+        @steps = new Lifelist.Collections.Steps url: @userGoalStepsPath(first_goal_id)
+        fetching_steps = @steps.fetch()
+        fetching_steps.done =>
+          @createOrUpdateStepsIndex(@steps, first_goal)
+
+  initSearch: ->
+    $('input.swiftype').swiftype
+      renderFunction: @renderSwiftypeResults
+      engineKey: '<%= ENV['SWIFTYPE_ENGINE_KEY'] %>'
+
+  renderSwiftypeResults: (document_type, item) =>
+    switch document_type
+      when 'users' then @userSearchItemTemplate(item: item)
+      when 'goals' then @goalSearchItemTemplate(item: item)
+      else 'no template'
+
+  stepsIndex: (username, goal_id) ->
+    @steps = new Lifelist.Collections.Steps(url: @userGoalStepsPath(goal_id))
+    fetching_steps = @steps.fetch()
+    fetching_steps.done =>
+      if @goals? || @goals_index?
+        @goals.map (goal) -> goal.set(active: false)
+        @active_goal = @goals.get(goal_id)
+        @active_goal.set(active: true)
+        @createOrUpdateStepsIndex(@steps, @active_goal)
+      else
+        @goals = new Lifelist.Collections.Goals(url: @userGoalsPath())
+        fetching_goals = @goals.fetch()
+        fetching_goals.done =>
+          @goals_index = new Lifelist.Views.GoalsIndex el: '#goals-container', collection: @goals, categories: @categories
+          @goals.map (goal) -> goal.set(active: false)
+          @active_goal = @goals.get(goal_id)
+          @active_goal.set(active: true)
+          @createOrUpdateStepsIndex(@steps, @active_goal)
+
+  goalShow: (goal_id) ->
+    @pathways = new Lifelist.Collections.Goals(url: @goalPathwaysPath(goal_id))
+    fetching = @pathways.fetch()
+    fetching.done =>
+      @goal_show = new Lifelist.Views.GoalShow(el: '#main-wrap', collection: @pathways)
+
+  goalEdit: (username, goal_id) ->
+    @goal_crop = new Lifelist.Views.GoalCrop(el: '#explore-wrap')
+
+  rootPath: ->
+    if $('body').hasClass('logged-out') # landing page
+      @landing_page = new Lifelist.Views.LandingPage(el: '#main-wrap')
+    else
+      # todo: pass in category
+      @featured_goals = new Lifelist.Collections.Goals(url: '/goals/featured')
+      fetching = @featured_goals.fetch()
+      fetching.done =>
+        @explore_index = new Lifelist.Views.ExploreIndex(el: '#explore-wrap', collection: @featured_goals)

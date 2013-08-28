@@ -1,0 +1,19 @@
+- crop_form_builder ||= nil
+.explore_item.viewer{ class: Goal.span_class_at(index) }
+  %a{:href => "/goals/#{goal.id}"}
+    .explore_image{:style => "background-image: url(#{goal.feature_image_url(index)});"}
+    .title
+      = goal.name
+    .btn-toolbar.list-actions
+      %a.btn.btn-secondary.add-goal{"data-id" => goal.id}
+        %i.icon-add
+      %a.btn.btn-secondary.done-it{"data-id" => goal.id}
+        %i.icon-ok
+    - if current_admin_user.present?
+      .btn-toolbar.edit-actions
+        - if crop_form_builder.present?
+          = link_to 'crop', '#', data: { action: 'start-cropping', id: goal.id }, class: 'btn btn-small btn-secondary'
+        - else
+          = link_to 'edit image', edit_goal_path(goal), class: 'btn btn-small btn-secondary'
+- if crop_form_builder.present?
+  = render partial: 'goals/cropper', locals: { goal: goal, index: index, f: crop_form_builder }

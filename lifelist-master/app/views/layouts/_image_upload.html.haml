@@ -1,0 +1,12 @@
+.fileupload.imageupload{ 'data-provides' => 'fileupload', class: image_url ? 'fileupload-exists' : 'fileupload-new' }
+  .fileupload-new.thumbnail
+    = image_tag 'http://www.placehold.it/200x200'
+  .fileupload-preview.fileupload-exists.thumbnail
+    = image_tag @user.avatar_url if current_user.avatar.present?
+  %div
+    %span.btn.btn-file
+      %span.fileupload-new Select image
+      %span.fileupload-exists Change
+      = builder.file_field :avatar
+    / TODO: Make this persist with hidden remove_avatar input
+    %a.btn.fileupload-exists{ 'data-dismiss' => 'fileupload', href: '#' } Remove

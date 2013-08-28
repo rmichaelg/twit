@@ -1,0 +1,92 @@
+class Lifelist.Views.GoalsIndex extends Backbone.View
+
+  template: JST['goals/index']
+  goalSearchItemTemplate: JST['search_items/goal']
+
+  initialize: ->
+    @collection.on('reset', @render, this)
+    @collection.on('add', @render, this)
+    @collection.on('change:active', @render, this)
+    @render()
+
+  render: ->
+    $(@el).html(@template(goals: @collection, goal_id: @options.goal_id))
+    @initAutocomplete()
+    # @makeSortable()
+    this
+
+  events:
+    'submit #new_goal': 'createGoal'
+    'click li.goal .remove': 'destroyGoal'
+    'click li.goal .edit': 'editGoal'
+    'click li.goal': 'renderSteps'
+
+  createGoal: (event) ->
+    event.preventDefault()
+    goal_attributes = name: $('#new_goal_name').val(), parent_goal_id: parseInt($('#new_goal_parent_id').val())
+    attributes = goal: goal_attributes
+    @collection.create attributes,
+      wait: true
+      success: (goal) -> 
+          mixpanel.track("Goal created")
+          $('#new_goal')[0].reset()
+          Lifelist.router.navigate Lifelist.router.userGoalPath(goal.id), trigger: true
+      error: @handleError
+
+  editGoal: (event) ->
+    event.preventDefault()
+    @target = $(event.currentTarget)
+    @goal = @collection.get(@target.parent().attr('data-id'))
+    view = new Lifelist.Views.GoalEdit(model: @goal)
+    @goal_modal = new Backbone.BootstrapModal({
+    	title: 'Edit Goal',
+    	content: view,
+    	okText: 'Save'
+    }).open()
+
+    @goal_modal.on 'hidden', =>
+      @collection.fetch()
+      if @collection.models.length == 0
+        Lifelist.router.navigate @profilePath(), trigger: true
+        window.location.reload()
+      else
+        Lifelist.router.navigate Lifelist.router.userGoalPath(@goal.get('id')), trigger: true
+
+  destroyGoal: (event) ->
+    event.preventDefault()
+    @target = $(event.currentTarget)
+    if @collection.get(@target.parent().attr('data-id')).destroy()
+      @target.parent().remove()
+
+  renderSteps: (event) ->
+    event.preventDefault() if event.preventDefault?
+    @target = $(event.currentTarget)
+    Lifelist.router.navigate Lifelist.router.userGoalPath(@target.attr('data-id')), trigger: true
+
+  handleError: (entry, response) ->
+    if response.status == 422
+      errors  = $.parseJSON(response.responseText).errors
+      for attribute, messages of errors
+        alert "#{attribute} #{message}" for message in messages
+
+  makeSortable: ->
+    $(@el).find('.sortable').sortable().on 'sortupdate', (e, ui) =>
+      goal = Lifelist.router.goals.get(ui.item.data('id'))
+      if typeof(goal.url) is 'function' # this step has not been sorted yet
+        goal.url = goal.url()
+        goal.url = "#{Lifelist.router.userGoalPath(goal.id)}/sort"
+      goal.save 'position', ui.item.parent().children('li').index(ui.item)
+
+  initAutocomplete: (event) ->
+    $(@el).find('input.goal-autocomplete').swiftype
+      renderFunction: @renderSwiftypeResults
+      documentTypes: ['goals']
+      onComplete: @setGoalParent
+      engineKey: '<%= ENV['SWIFTYPE_ENGINE_KEY'] %>'
+
+  renderSwiftypeResults: (document_type, item) =>
+    @goalSearchItemTemplate(item: item)
+
+  setGoalParent: (item, prefix) ->
+    $('input#new_goal_name').val(item.name)
+    $('input#new_goal_parent_id').val(item.external_id)

@@ -1,0 +1,44 @@
+-#
+  = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => 'form-search' }) do |f|
+    .oauth
+      = link_to omniauth_authorize_path(:user, :facebook), class: 'btn btn-facebook btn-block' do
+        %i.icon-facebook
+        Sign in with Facebook
+    %p Or
+    .form-actions
+      = f.email_field :email, class: 'input-large', placeholder: 'Email'
+      = f.password_field :password, class: 'input-large', placeholder: 'Password'
+      = f.submit "Sign in", class: 'btn btn-secondary btn-block'
+      %p.forgot= render "devise/shared/links"
+.outer
+  .inner
+    %img{:src => "/assets/logo_lifelist_large.png"}
+    %h1 Discover the best way to achieve any goal.
+    = form_for @invite_request, remote: true, validate: true, html: { class: 'form-inline sign-up' } do |f|
+      = f.text_field :username, placeholder: 'Reserve your username', class: 'span4'
+      = f.email_field :email, placeholder: 'Your e-mail address', class: 'span4'
+      = f.submit 'Join us', class: 'btn btn-large btn-orange'
+    %p.success-message Thanks for requesting an invite! We'll get back to you soon.
+    %form.form-inline.sign-in
+      Already have an account? Lucky you.
+      = link_to 'Sign in', '#new_user', class: 'btn btn-small btn-outline', id: 'show-sign-in'
+    = form_for(resource, :as => resource_name, :url => session_path(resource_name), :validate => true, :html => { :class => 'form-search' }) do |f|
+      .oauth
+        = link_to omniauth_authorize_path(:user, :facebook), class: 'btn btn-facebook btn-block' do
+          %i.icon-facebook
+          Sign in with Facebook
+      %p Or
+      .form-actions
+        = f.email_field :email, class: 'input-large', placeholder: 'Email'
+        = f.password_field :password, class: 'input-large', placeholder: 'Password'
+        = f.submit "Sign in", class: 'btn btn-secondary btn-block'
+        %p.forgot= render "devise/shared/links"
+
+    .twitter
+      = link_to 'http://twitter.com/lifelistapp', target: '_blank' do
+        %i.icon-twitter
+        @lifelistapp
+.navbar.navbar-fixed-bottom
+  .navbar-inner
+    %ul.nav.pull-left
+      %li.copyright &copy; 2013 Lifelist, Inc.

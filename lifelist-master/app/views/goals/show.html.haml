@@ -1,0 +1,27 @@
+.explore_item
+  .explore_image{:style => "background-image: url(#{@goal.feature_image_url(0)});"}
+  .title
+    = @goal.name
+
+.pathways
+  - @goal.pathways.each do |pathway|
+    .pathway{ data: {id: pathway.id} }
+      =#pathway.name
+      .pathway-meta.clearfix
+        = image_tag pathway.user.try(:avatar_url, :thumb), class: 'user-thumb pull-left'
+        .user-meta.pull-left
+          .user-name
+            %strong= pathway.user.try(:full_name) || 'Anonymous'
+          .user-location
+            %i.icon-location
+            = pathway.user.try(:location)
+        = link_to '#upvote', class: 'btn pull-right', data: { action: :upvote } do
+          - if pathway.votes.present?
+            %i.icon-heart
+            #{pathway.votes.count}
+          - else
+            %i.icon-heart
+            0
+      %ol.pathway-steps.step-list
+        - pathway.steps.each do |step|
+          %li= step.name

@@ -1,0 +1,20 @@
+@import 'swiftype-autocomplete-jquery/autocomplete';
+
+.swiftype-widget .autocomplete {
+  ul li {
+    height: 30px;
+
+    img {
+      float: left;
+      margin-right: 10px;
+    }
+    .title {
+      float: left;
+    }
+    .type {
+      float: right;
+      color: #ccc;
+      text-transform: uppercase;
+    }
+  }
+}

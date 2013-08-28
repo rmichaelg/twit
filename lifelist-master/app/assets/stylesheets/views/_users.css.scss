@@ -1,0 +1,242 @@
+body.main {
+  padding-top: 75px;
+
+  aside {
+    padding-right: 20px;
+  }
+
+  #main-wrap {
+
+  }
+
+}
+
+#new_goal {
+  .btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+.goal_list {
+  list-style: none;
+  margin: 0 0 20px;
+
+  & > li {
+    float: left;
+    margin: 0 0 8px;
+    padding: 10px 15px;
+    width: 193px;
+    border: 1px solid transparent;
+    @include border-radius( 5px );
+    position: relative;
+
+    .edit {
+      display: none;
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      color: lighten( $text-color, 65% );
+
+      &:hover {
+        color: lighten( $text-color, 50% );
+      }
+
+    }
+
+    &:hover {
+      border-color: rgba(0,0,0,.1);
+      cursor: pointer;
+
+      .edit {
+        display: block;
+      }
+
+    }
+
+    &.active {
+      @include box-shadow( 0 1px 5px 0 rgba(0,0,0,.05) inset );
+      background: #fafafa;
+      border: 1px solid rgba(0,0,0,.05);
+      color: lighten( $text-color, 50% );
+
+      .edit {
+        display: block;
+        color: lighten( $text-color, 55% );
+        text-shadow: 0 1px 0 rgba(255,255,255,.2);
+        &:hover {
+          color: lighten( $text-color, 40% );
+        }
+
+      }
+
+    }
+
+  }
+
+}
+.detail-editor {
+  display: none;
+
+  textarea.step-description {
+    float: left;
+    width: 320px;
+    height: 120px;
+    border: 0;
+    resize: none;
+  }
+  input[type=text].step-url {
+    float: left;
+    width: 320px;
+  }
+  .edit-actions {
+    .fileupload-exists {
+      .fileupload-new { display: inline; }
+      .destroy-step-image { display: inline; }
+      .add-step-image { display: none; }
+    }
+    .fileupload-new {
+      .destroy-step-image { display: none; }
+      .add-step-image { display: inline; }
+    }
+  }
+  .step-embed {
+    float: right;
+    width: 320px;
+    height: 180px;
+    overflow: hidden;
+    padding: 5px 10px 0 0;
+
+    &.uploading {
+      .spinner {
+        margin: 80px 20px;
+      }
+      .edit-actions .fileupload { display: none; }
+    }
+  }
+}
+
+#goal-container {
+  margin-top: 20px;
+}
+
+.clear {
+  clear:both;
+  margin-bottom:10px;
+}
+
+.step-list, .new-step-wrap {
+  margin: 20px 0 0 0;
+  padding: 0;
+  list-style: none;
+  @include border-radius( 5px );
+  padding: 10px;
+  background: #fafafa;
+
+  &.new-step-wrap {
+    border-top: 0;
+    margin: 0 0 20px 0;
+  }
+  & > li {
+    background-color: white;
+    margin: 0;
+    border: 1px solid rgba(0,0,0,.1);
+    border-top: 0;
+
+    &:first-child {
+      @include border-radius( 5px 5px 0 0 );
+      border-top: 1px solid rgba(0,0,0,.1);
+    }
+
+    &:last-child {
+      @include border-radius( 0 0 5px 5px );
+    }
+
+    .handle {
+      float: left;
+      width: 20px;
+      height: 40px;
+    }
+
+    &:hover .handle {
+      background-image: url("/assets/drag.png");
+      background-repeat: no-repeat;
+      background-position: 8px 50%;
+      cursor: move;
+    }
+
+    &.editing { 
+      background-color: lighten( $color-secondary, 55% );
+      input[type="text"] {
+        background-color: lighten( $color-secondary, 55% );
+      }
+
+      form { height: 285px; }
+    }
+
+    &.sortable-placeholder {
+      margin: 4px;
+      height: 30px;
+      border: 1px dashed #ccc;
+    }
+
+    form {
+      margin: 0 0 0 11px;
+
+      input[type="text"], textarea {
+        border: 0;
+        margin: 6px;
+        @include box-shadow( none );
+        width: 480px;
+
+      }
+      input[disabled] {
+        cursor: inherit;
+        background-color: inherit;
+      }
+    }
+
+    .step-status {
+      margin: 8px 8px 0 0;
+
+      .btn {
+        margin-left: 10px;
+      }
+    }
+
+  }
+
+}
+
+.goal-banner {
+  .edit-actions .fileupload-exists .fileupload-new {
+    display: block;
+  }
+
+  &.uploading {
+    .explore_image {
+      .spinner {
+        margin: 160px auto;
+      }
+    }
+    .edit-actions .fileupload {
+      display: none;
+    }
+  }
+}
+
+.goal-actions {
+  display: inline-block;
+  position: relative;
+  width: 715px;
+  margin: 10px 0 0 0;
+
+  .btn, .dropdown-menu {
+    font-size: 12px;
+  }
+  .published-at {
+    clear: both;
+    font-size: 12px;
+    font-style: italic;
+  }
+}

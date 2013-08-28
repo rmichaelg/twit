@@ -1,0 +1,15 @@
+{
+  "name": "Lifelist",
+  "version": "1.0.0",
+  "main": "",
+  "dependencies": {
+    "swiftype-autocomplete-jquery": "swiftype/swiftype-autocomplete-jquery",
+    "spinjs": "http://fgnass.github.io/spin.js/dist/spin.js",
+    "jwindowcrop": "tybro0103/jWindowCrop",
+    "pageless": "jney/jquery.pageless",
+    "html5sortable": "farhadi/html5sortable",
+    "backbone-bootstrap-modal": "powmedia/backbone.bootstrap-modal",
+    "jquery-timeago": "http://timeago.yarp.com/jquery.timeago.js",
+    "jquery-leanmodal": "FinelySliced/leanModal.js"
+  }
+}

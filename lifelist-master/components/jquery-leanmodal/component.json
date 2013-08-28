@@ -1,0 +1,9 @@
+{
+  "name": "jquery-leanmodal",
+  "version": "0.0.0",
+  "commit": "dfe236edf80087bd837b2ee719e4c156684e5d18",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/FinelySliced/leanModal.js.git"
+  }
+}

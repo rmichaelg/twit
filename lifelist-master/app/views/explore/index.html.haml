@@ -1,0 +1,12 @@
+- content_for :head do
+  = stylesheet_link_tag 'pageless-loader'
+  = javascript_include_tag 'pageless/lib/jquery.pageless'
+  :javascript
+    var goals_listed = #{@goals_listed};
+    var goals_done= #{@goals_done};
+
+#explore-wrap.container-fluid
+  = render partial: 'explore_rows', locals: { goals: @goals }
+  = will_paginate(@goals)
+  = render partial: 'pageless_loader'
+  = pageless(@goals.total_pages, explore_path, 'explore-wrap')

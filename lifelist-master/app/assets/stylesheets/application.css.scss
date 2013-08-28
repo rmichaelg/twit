@@ -1,0 +1,22 @@
+/*
+ *= require_self
+ */
+
+@import 'bootstrap';
+//@import 'bootstrap-responsive';
+@import 'bootstrap/mixins';
+@import 'bootstrap-fileupload';
+@import 'lifelist-icons.css.erb';
+
+@import 'partials/config';
+@import 'partials/layout';
+@import 'partials/form';
+@import 'partials/dropdown';
+@import 'partials/buttons';
+@import 'partials/navbar';
+@import 'partials/autocomplete';
+
+@import 'views/devise';
+@import 'views/explore';
+@import 'views/users';
+@import 'views/goals';

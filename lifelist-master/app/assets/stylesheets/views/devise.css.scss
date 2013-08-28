@@ -1,0 +1,184 @@
+body.sessions, body.registrations, body.passwords, body.explore.logged-out {
+  background-color: #33cdbd;
+  background-image: url("/assets/lanterns.jpg");
+  background-position: top center;
+  background-repeat: no-repeat;
+  padding: 0;
+  
+  @include background-size( cover );
+
+  header {
+    display: none;
+  }
+
+  .outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+
+  .inner {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    padding-bottom: 54px;
+    color: #24635c;
+    text-shadow: 0 1px 0 rgba(255,255,255,.2);
+  }
+
+  #uvTab {
+    display: none;
+   }
+
+  #main-wrap {
+    @include box-shadow( none );
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+  &.registrations.new #main-wrap {
+    width: 350px;
+    text-align: center;
+    margin: 40px auto;
+  }
+
+
+  h1 {
+    font-weight: 100;
+    font-size: 36px;
+    line-height: 36px;
+    margin: 15px 0 25px;
+  }
+
+  .oauth {
+    padding: 0 20px;
+  }
+
+  p {
+    color: lighten( $text-color, 20% );
+    margin: 10px 0;
+  }
+
+  .success-message {
+    font-size: 24px;
+    line-height: 46px;
+    margin: 40px auto;
+    display: none;
+    color: white;
+    text-shadow: none;
+  }
+
+  form {
+    input[type="text"], input[type="email"], input[type="password"] {
+      margin: 0 5px;
+      padding: 8px 40px 8px 15px;
+      height: 30px;
+      line-height: 30px;
+      border: 0;
+      @include border-radius( 5px );
+      @include box-shadow( 0 1px 0 0 rgba(0,0,0,.15) );
+
+      font-weight: 100;
+      font-size: 18px;
+
+      &:focus {
+        @include box-shadow( 0 1px 0 0 rgba(0,0,0,.15) );
+      }
+    }
+    .field_with_errors {
+      display: inline-block;
+      position: relative;
+
+      .icon-attention {
+        position: absolute;
+        top: 13px;
+        right: 20px;
+        color: #E24830;
+        font-size: 18px;
+        height: 18px;
+        width: 18px;
+        &:before { margin: 0; }
+      }
+
+      .message {
+        display: block;
+        position: absolute;
+        left: 0;
+        padding: 5px;
+      }
+    }
+  }
+
+  .sign-up{
+    margin: 40px auto;
+
+    .btn {
+      width: 160px;
+      margin: 0 5px;
+    }
+  }
+
+  .sign-in {
+    color: white;
+    font-size: 14px;
+    text-shadow: none;
+
+    .btn {
+      margin-left: 5px;
+      font-size: 14px;
+    }
+  }
+
+  &.explore.index form#new_user, &.sessions.new form#new_user {
+    display: none;
+    padding: 30px;
+    height: 320px;
+    width: 290px;
+    background: #faf7f2;
+    @include border-radius(5px);
+
+    input {
+      margin: 10px 0;
+    }
+  }
+  &.registrations.new form#new_user {
+    margin: 0;
+    padding: 30px;
+
+    input {
+      margin: 10px 0;
+    }
+  }
+
+  .twitter {
+    margin: 60px auto;
+    font-size: 14px;
+
+    .icon-twitter {
+      color: white;
+      margin-right: 5px;
+    }
+
+    a, a:hover {
+      color: lighten( #24635c, 10% );
+      text-decoration: none;
+
+      &:hover {
+        color: #24635c;
+      }
+    }
+  }
+
+  .forgot {
+    a, a:hover { color: $text-color; }
+  }
+
+  .form-actions {
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    background: whitesmoke;
+  }
+}

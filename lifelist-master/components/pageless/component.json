@@ -1,0 +1,9 @@
+{
+  "name": "pageless",
+  "version": "0.0.0",
+  "commit": "0b4a340e3fd1ee5ba255058b443958500a151760",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jney/jquery.pageless.git"
+  }
+}

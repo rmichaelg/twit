@@ -1,0 +1,5 @@
+<% if @item['avatar_thumb']: %>
+  <img src="<%= @item['avatar_thumb'] %>">
+<% end %>
+<p class="title"><%- @item['highlight']['name'] %></p>
+<div class="type">profile</div>

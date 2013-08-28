@@ -1,0 +1,25 @@
+- content_for :head do
+  = javascript_include_tag 'spinjs/index'
+  :javascript
+    var username = '#{@user.username.to_s}' || 'profile';
+    var user_id = '#{@user.id}';
+    var editable = #{@user == current_user};
+    var categories_data = eval(#{@categories.to_json});
+
+
+#lifelist-wrap.container-fluid
+  .row-fluid
+    %aside.span3
+      %dl.vcard
+        %dt Photo
+        %dd= image_tag(@user.avatar_url) unless @user.avatar_url.blank?
+        %dt Name
+        %dd.name= @user.full_name
+        - unless @user.location.blank?
+          %dt Location
+          %dd.location
+            %i.icon-location
+            = @user.location
+      #goals-container.has-list
+    %section.span9#goal-container
+      #steps-container.has-list

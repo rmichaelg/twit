@@ -1,0 +1,20 @@
+<% if editable: %>
+  <form id="new_goal" class="form-search">
+    <input type="text" name="name" id="new_goal_name" class="goal-autocomplete" placeholder="What do you want to achieve?" maxlength="100">
+    <input type="hidden" name="parent_id" id="new_goal_parent_id">
+    <input type="submit" value="Add a Goal" class="btn">
+  </form>
+<% end %>
+
+<ul class="sortable goal_list">
+<% for goal in @goals.models: %>
+  <li data-id=<%= goal.id %> class="<%= if goal.get('active') then 'goal active' else 'goal' %>">
+    <% if editable: %>
+      <a href="#editGoal" class="edit">
+        <i class="icon-edit"></i>
+      </a>
+    <div class="non-editable"><%= goal.get('name') %></div>
+    <% end %>
+  </li>
+<% end %>
+</ul>

@@ -1,0 +1,68 @@
+%nav.navbar.navbar-fixed-top
+  .navbar-inner.container
+    %a{:href => "/", :class=>"logo" }
+    .nav-collapse
+      %ul.nav
+        %li.categories.dropdown{class: is_active?(:explore, :index)}
+          %a.dropdown-toggle{:href => explore_path}
+            Explore
+          %ul.dropdown-menu.clearfix
+            %li
+              %a{:href => "/explore/adventure"}Adventure
+            %li
+              %a{:href => "/explore/entertainment"}Entertainment
+            %li
+              %a{:href => "/explore/travel"}Travel
+            %li
+              %a{:href => "/explore/habits"}Habits
+            %li
+              %a{:href => "/explore/spiritual"}Spiritual
+            %li
+              %a{:href => "/explore/athletics"}Athletics
+            %li
+              %a{:href => "/explore/health_and_nutrition"}Health & Nutrition
+            %li
+              %a{:href => "/explore/education"}Education
+            %li
+              %a{:href => "/explore/skills"}Skills
+            %li
+              %a{:href => "/explore/art"}Art
+            %li
+              %a{:href => "/explore/music_and_dance"}Music &amp; Dance
+            %li
+              %a{:href => "/explore/literature"}Literature
+            %li
+              %a{:href => "/explore/financial"}Financial
+            %li
+              %a{:href => "/explore/professional"}Professional
+            %li
+              %a{:href => "/explore/altruistic"}Altruistic
+            %li
+              %a{:href => "/explore/environment"}Environment
+            %li
+              %a{:href => "/explore/animals"}Animals
+            %li
+              %a{:href => "/explore/family"}Family
+            %li
+              %a{:href => "/explore/relationships"}Relationships
+        - if user_signed_in?
+          %li{class: is_active?(:users, :show) || is_active?('users/goals', :show)}
+            = link_to 'Lifelist', profile_path(current_user)
+      %ul.nav.pull-right
+        %li.search
+          = form_tag '' do
+            = text_field_tag :search, nil, placeholder: 'Search...', class: 'swiftype st-search-input', autocomplete: :off
+        - if user_signed_in?
+          %li.settings.dropdown
+            %a.dropdown-toggle.profile{"data-toggle" => "dropdown", :href => "#"}
+              %i.icon-settings
+              %span.caret
+            %ul.dropdown-menu
+              %li.edit-settings
+                = image_tag current_user.avatar_url(:thumb) if current_user.avatar.present?
+                %strong
+                  = current_user.first_name
+                  = current_user.last_name
+              %li= link_to 'Settings', edit_profile_path
+              %li= link_to 'Help', profile_path(current_user)
+              %li= link_to 'Logout', destroy_user_session_path, method: :delete

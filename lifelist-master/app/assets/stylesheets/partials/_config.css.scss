@@ -1,0 +1,22 @@
+// Colors
+$color-navbar: #2a454f;
+$color-primary: #2a454f;
+$color-secondary: #54877e;
+$color-success: #b1b88c;
+$color-warning: #f2d9a0;
+$color-error: #9e373e;
+
+$color-background: #faf7f2;
+
+// Fonts
+$font-default: Helvetica, Arial, sans-serif;
+$font-secondary: 'Montserrat', sans-serif;
+$text-color: #333;
+
+// Mixins
+@mixin font-type( $font, $size, $weight, $transform: none ) {
+  font-family: $font;
+  font-weight: $weight;
+  font-size: $size;
+  text-transform: $transform;
+}

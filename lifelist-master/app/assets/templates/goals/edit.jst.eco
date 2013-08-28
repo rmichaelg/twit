@@ -1,0 +1,22 @@
+<h3>Edit <%= @goal.get("name") %></h3>
+<div>Name: <input type="text" value="<%= @goal.get("name") %>" id="goal_name"></div>
+<!--
+<div>
+  Category:
+  <select name="edit_goal_category" id="edit_goal_category">
+    <option value="">Select Category</option>
+    <% for category in @categories.models: %>
+    <option value="<%= category.get('id') %>" <%= "selected" if category.get('id')==@goal.get('category_id') %>><%= category.get('name') %></option>
+    <% end %>
+  </select>
+</div>
+-->
+<div>
+    Status:
+      <select name="edit_goal_status" id="edit_goal_status">
+        <% for status in ["To-Do", "In Progress", "Done"]: %>
+            <option value="<%= status %>" <%= "selected" if @goal.get('status')==status %>><%= status %></option>
+        <% end %>
+      </select>
+</div>
+<span id="delete"><button id="delete_goal" class="btn-danger">Delete Goal</button></span>

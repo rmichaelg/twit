@@ -1,0 +1,30 @@
+- content_for :head do
+  = stylesheet_link_tag 'jwindowcrop/jWindowCrop'
+  = javascript_include_tag 'jwindowcrop/jquery.jWindowCrop'
+  = javascript_include_tag 'spinjs/index'
+
+#explore-wrap.container-fluid
+  %h1 Edit Goal
+  = form_for @goal do |f|
+    = f.fields_for :goal_image do |goal_image_fields|
+      .fileupload.fileupload-new{"data-provides" => "fileupload"}
+        .input-append
+          .uneditable-input.span3
+            %i.icon-file.fileupload-exists
+            %span.fileupload-preview
+          %span.btn.btn-file
+            %span.fileupload-new Select file
+            %span.fileupload-exists Change
+            = goal_image_fields.file_field :image
+          %a.btn.fileupload-exists{"data-dismiss" => "fileupload", :href => "#"} Remove
+
+    .btn-group= f.submit 'Upload image', class: 'btn btn-large btn-primary'
+
+  = form_for @goal, url: crop_goal_path(@goal), html: { id: :crop_goal }, remote: true do |f|
+    = f.fields_for :goal_image do |goal_image_fields|
+      = render partial: 'explore/explore_rows', locals: { goals: [@goal, @goal, @goal],
+                                                          sequence_offset: 2,
+                                                          crop_form_builder: goal_image_fields }
+
+    .btn-group
+      = f.submit 'Crop', class: 'btn btn-large btn-primary'

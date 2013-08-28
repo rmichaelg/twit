@@ -1,0 +1,14 @@
+<div id="goal-name"></div>
+
+<ol class="sortable step-list">
+</ol>
+
+<!-- new step -->
+<% if editable: %>
+<ol class="new-step-wrap">
+  <li class="step">
+    <form class="editor" id="new_step_form">
+      <input type="text" name="new_step_name" id="new_step_name" value="" placeholder="Enter a new action">
+    </form>
+  </li>
+<% end %>

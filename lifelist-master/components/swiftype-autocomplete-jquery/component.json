@@ -1,0 +1,9 @@
+{
+  "name": "swiftype-autocomplete-jquery",
+  "version": "0.0.0",
+  "commit": "eec8128663042da40a6b52044e7e490527b82fa0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/swiftype/swiftype-autocomplete-jquery.git"
+  }
+}

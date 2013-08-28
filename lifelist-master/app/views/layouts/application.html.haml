@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    %title Lifelist
+    = stylesheet_link_tag    "application", :media => "all"
+    = stylesheet_link_tag    "http://fonts.googleapis.com/css?family=Open+Sans:400,300"
+    = stylesheet_link_tag    "http://fonts.googleapis.com/css?family=Montserrat"
+    = render partial: 'layouts/remove_fb_url_fragment'
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    = yield :head
+  %body{class:"#{controller_name} #{action_name} #{user_signed_in? ? 'logged-in' : 'logged-out'}"}
+    %header
+      = render partial: 'layouts/navbar'
+      - # todo: prettier flashes and make them visible on landing page
+      - flash.each do |name, msg|
+        - if msg.is_a?(String)
+          %div{:class => "alert alert-large alert-#{name == :notice ? "success" : "error"} container"}
+            %a.close{"data-dismiss" => "alert"} ×
+            = content_tag :div, msg, :id => "flash_#{name}"
+    #main-wrap.container
+      = yield
+      = render partial: 'layouts/ga'
+      = render partial: 'layouts/mixpanel'
+      = render partial: 'layouts/uservoice'

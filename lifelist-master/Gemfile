@@ -1,0 +1,42 @@
+source 'https://rubygems.org'
+#ruby "2.0.0"
+
+gem 'rails', '3.2.13'
+
+gem 'pg'
+gem 'sqlite3', group: [:development, :test]
+gem 'dotenv-rails', group: [:development, :test]
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'uglifier', '>= 1.0.3'
+end
+
+gem 'bootstrap-sass'
+gem 'jquery-rails', '2.3.0'
+gem 'haml'
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'backbone-on-rails'
+gem 'flickraw-cached'
+gem 'carrierwave'
+gem "fog", "~> 1.10.1"
+gem 'rmagick'
+gem 'activeadmin'
+gem 'gibbon'
+gem 'will_paginate'
+gem 'thin'
+gem 'swiftype'
+gem 'sprockets', '2.2.2.backport1'
+gem 'bower'
+gem 'unicorn'
+gem 'acts-as-taggable-on'
+gem 'newrelic_rpm'
+gem 'client_side_validations'
+gem 'valid_email', require: 'valid_email/email_validator'
+gem 'thumbs_up'

@@ -1,0 +1,9 @@
+- sequence_offset ||= 0
+- crop_form_builder ||= nil
+- goals.each_with_index do |goal, index|
+  - sequence_index = index + sequence_offset
+  - next_goal = goals[index + 1]
+  - if index % 2 == 0
+    .row-fluid
+      = render goal, index: sequence_index, crop_form_builder: crop_form_builder
+      = render next_goal, index: sequence_index + 1, crop_form_builder: crop_form_builder if next_goal.present?
